@@ -137,6 +137,41 @@
     color: #08194a;
 }
 
+/*Calendar*/
 
+.table td {
+    position: relative;
+    cursor: pointer;
+}
 
+.date-link {
+    display: block;
+    padding: 10px;
+    text-align: center;
+    color: inherit;
+    text-decoration: none;
+}
 
+.date-link:hover {
+    background-color: #eee;
+}
+
+.month-year {
+    font-size: 1.5em;
+}
+#time-slots {
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+}
+
+.time-slot {
+margin: 5px;
+padding: 10px;
+border: 1px solid #ccc;
+cursor: pointer;
+}
+
+.time-slot:hover {
+background-color: #eee;
+}
