@@ -4,6 +4,7 @@ Students:
 
 Oussema Nijewi - 300190313
 Kheswari Gukhool = 300145273
+Gini Sheja = 300222140
 
 -----------------------------------------------
 We made both websites on seperate branches
