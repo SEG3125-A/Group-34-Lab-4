@@ -65,5 +65,34 @@
     left: 8%;
 }
 
+.carousel-caption h5 {
+    font-size: 30px;
+    margin-top: 25px;
+    font-weight: 700;
+    text-align: left;
+    color: #e53f29;
+}
+
+.carousel-caption span {
+    color: #fff;
+}
+
+.carousel-caption p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #fff;
+}
+
+.carousel-caption a {
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #fff;
+    padding: 5px 20px;
+    display: inline-block;
+    color: #08194a;
+    margin-top: 15px;
+    border-radius: 5px;
+}
+
 
 
