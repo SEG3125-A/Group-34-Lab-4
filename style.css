@@ -8,7 +8,7 @@
 
 .section-header h2 {
     color: #08194a;
-    font-size: 45px;
+    font-size: 40px;
     font-weight: 700;
 }
 
@@ -112,8 +112,29 @@
 
 .about-text .btn {
     background: #08194a;
-
     color: #fff;
+}
+
+/* services section */
+
+.single-services {
+    background: #08194a;
+    color: #fff;
+    padding: 30px 15px;
+}
+
+.single-services i {
+    font-size: 45px;
+    margin-bottom: 30px;
+}
+
+.single-services h2 {
+    font-family: bebas neue;
+}
+
+.single-services .btn {
+    background: #fff;
+    color: #08194a;
 }
 
 
