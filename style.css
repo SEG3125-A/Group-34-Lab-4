@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
 * {
-    font-family: montserrat;
+    font-family: 'Poppins', sans-serif, montserrat;
 }
 
 .section-header {
@@ -199,41 +201,113 @@
 
 /* Calendar */
 
-.table td {
-    position: relative;
-    cursor: pointer;
+
+
+.calendar-wrapper {
+    display: none;
+    width: 450px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
 }
 
-.date-link {
-    display: block;
-    padding: 10px;
+.calendar-wrapper header {
+    display: flex;
+    align-items: center;
+    padding: 25px 30px 10px;
+    justify-content: space-between;
+}
+
+header .current-date {
+    font-size: 1.45 rem;
+    font-weight: 500;
+
+}
+
+header .icons span {
+    height: 38px;
+    width: 38px;
+    color: #878787;
+    font-size: 1.9rem;
+    margin: 0 1px;
     text-align: center;
-    color: inherit;
-    text-decoration: none;
+    line-height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    
 }
 
-.date-link:hover {
-    background-color: #eee;
+header .icons span:hover {
+    background: #f2f2f2;
 }
 
-.month-year {
-    font-size: 1.5em;
-}
-#time-slots {
-display: flex;
-justify-content: center;
-flex-wrap: wrap;
+header .icons span:last-child {
+    margin: -10px;
 }
 
-.time-slot {
-margin: 5px;
-padding: 10px;
-border: 1px solid #ccc;
-cursor: pointer;
+.calendar {
+    padding: 20px;
 }
 
-.time-slot:hover {
-background-color: #eee;
+.calendar .days {
+    margin-bottom: 20px;
+}
+
+
+.calendar .weeks li {
+    font-weight: 500;
+}
+
+.calendar ul {
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.calendar ul li {
+    position: relative;
+    width: calc(100% / 7);
+}
+
+.calendar .days li {
+    z-index: 1;
+    cursor: pointer;
+    margin-top: 30px;
+}
+
+.days li.inactive {
+    color: #aaa;
+} 
+
+.days li.active:hover {
+    color: #fff;
+}
+
+.calendar .days li::before {
+    position: absolute;
+    content: "";
+    height: 40px;
+    width: 40px;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    z-index: -1;
+    transform: translate(-50%, -50%);
+}
+
+.days li:hover:before {
+    background: #f2f2f2;
+}
+
+.days li.active:hover::before {
+    background: #08194a;
 }
 
 /* contact section */
