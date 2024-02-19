@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        
 
 </head>
 
@@ -130,9 +131,7 @@
 
     </div>
 
-
-
-
+    
     <!-- Footer Start -->
     <footer class="text-center text-lg-start bg-light text-muted">
         <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
@@ -193,7 +192,147 @@
     </footer>
     <!-- Footer End -->
 
+
+
+To implement the functionality using the existing "Book Appointment" buttons, we need to modify the jQuery script slightly to ensure it interacts specifically with those buttons. Here's an updated version that attaches the modal opening functionality to the "Book Appointment" buttons specifically, and processes the booking using the information provided in the modal.
+
+Firstly, make sure each "Book Appointment" button has a unique identifier or a common class. Since they already have a common class btn, we'll use that for targeting. We'll also modify the buttons to use data-bs-toggle and data-bs-target attributes, which are Bootstrap's way to trigger modals without needing additional JavaScript for the trigger. However, to maintain clarity and stick to your request, we'll directly use jQuery to show the modal without relying on these data attributes.
+
+Here's how you should adjust the HTML for the modal to ensure it's ready for jQuery manipulation:
+
+html
+Copy code
+<!-- Add jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- Add this at the end of your body tag, before the script tag for bootstrap bundle -->
+<div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bookingModalLabel">Book Appointment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Professional Selection -->
+                <div class="mb-3">
+                    <label for="professionalSelect" class="form-label">Choose Your Professional</label>
+                    <select class="form-select" id="professionalSelect">
+                        <option selected>Choose...</option>
+                        <option value="1">Yvan Bobos</option>
+                        <option value="2">Gyslain Guy</option>
+                        <option value="3">Serge Romeo</option>
+                    </select>
+                </div>
+                <!-- Payment Information -->
+                <div class="mb-3">
+                    <label for="cardInfo" class="form-label">Credit Card Information</label>
+                    <input type="text" class="form-control" id="cardInfo" data-bs-toggle="tooltip" placeholder="Card Number" title="Enter your 16-digit credit card number without spaces">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="expDate" placeholder="Expiration Date (MM/YY)">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="cvv" placeholder="CVV">
+                </div>
+
+                <!-- Add these inside the modal-body in your modal -->
+<div class="mb-3">
+    <label for="phoneNumber" class="form-label">Phone Number</label>
+    <input type="text" class="form-control" id="phoneNumber" placeholder="Phone Number">
+    <div class="invalid-feedback">
+        Please enter a valid phone number.
+    </div>
+</div>
+<div class="mb-3">
+    <label for="appointmentDate" class="form-label">Appointment Date</label>
+    <input type="date" class="form-control" id="appointmentDate">
+</div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="confirmBooking">Confirm Booking</button>
+            </div>
+        </div>
+    </div>
+</div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            // RegExp patterns
+            var phonePattern = /^\+?\d{10,15}$/; // Adjust according to your needs
+            var cardPattern = /^\d{16}$/; // Simplified pattern for demonstration
+        
+            // Attach click event listener to 'Book Appointment' buttons
+            $(".btn").click(function(){
+                $('#bookingModal').modal('show');
+            });
+        
+            // Handle the booking confirmation
+            $("#confirmBooking").click(function(){
+                var professional = $("#professionalSelect").val();
+                var phoneNumber = $("#phoneNumber").val();
+                var cardInfo = $("#cardInfo").val();
+                var expDate = $("#expDate").val();
+                var cvv = $("#cvv").val();
+        
+                // Validate phone number
+                if (!phonePattern.test(phoneNumber)) {
+                    $("#phoneNumber").addClass("is-invalid"); // Highlight input as invalid
+                    return false; // Prevent form submission
+                } else {
+                    $("#phoneNumber").removeClass("is-invalid");
+                }
+        
+                // Validate credit card information
+                if (!cardPattern.test(cardInfo)) {
+                    $("#cardInfo").addClass("is-invalid");
+                    return false;
+                } else {
+                    $("#cardInfo").removeClass("is-invalid");
+                }
+        
+                // Implement your booking logic here
+                // Example: console.log or AJAX request to server
+        
+                // Close the modal after booking
+                $('#bookingModal').modal('hide');
+                // Optionally, show a confirmation message or perform other actions
+            });
+        
+            // Update the appointmentDate input based on professional selection and weekends
+            $("#professionalSelect").change(function() {
+                updateDateAvailability();
+            });
+        
+            function updateDateAvailability() {
+                // Example logic to grey out weekends and specific professional's off-days
+                // This requires more complex handling, typically involving backend data for professionals' schedules
+                // For now, ensure your date picker handles weekends appropriately in your backend or through client-side logic
+            }
+        });
+
+        $(document).ready(function(){
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+});
+
+$(document).ready(function(){
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    });
+});
+
+        </script>
+        
+        
 </body>
 
 </html>
