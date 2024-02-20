@@ -95,6 +95,7 @@ $(document).ready(function() {
 
         currentDate.text(`${months[currentMonth]} ${currentYear}`);
         daysTag.html(liTag);
+        
     };
     renderCalendar();
 
@@ -110,7 +111,31 @@ $(document).ready(function() {
         }
         renderCalendar();
     });
+    registerClickEvent();
 });
+
+// Function to register click event on active days
+const registerClickEvent = () => {
+    // Select all active list items within the .days element
+    var activeDays = document.querySelectorAll('.days');
+    var paymentForm = document.querySelector('.payment-body');
+    var submitBtn = document.querySelector('.submit-btn');
+    console.log(submitBtn);
+
+    // Iterate over each active day and attach a click event listener
+    activeDays.forEach(function(day) {
+        day.addEventListener('click', function() {
+            console.log('Active date click event registered');
+            var calendarWrapper = document.querySelector('.calendar-wrapper');
+            calendarWrapper.style.display = 'none';
+            paymentForm.style.display = 'block';
+        });
+    });
+
+    submitBtn.onclick = function() {
+        paymentForm.style.display = 'none';
+    };
+}
 
 /*display calendar event handling */
 var selectServiceButtons = document.querySelectorAll(".btn");
@@ -140,3 +165,57 @@ document.body.addEventListener("click", function(event) {
         calendarBody.style.display = "none";
     }
 });
+
+/*payment card handling*/
+
+document.addEventListener("DOMContentLoaded", function() {
+    var cardNumberInput = document.querySelector(".card-number-input");
+    var cardNumberBox = document.querySelector(".card-number-box");
+
+    var cardHolderInput = document.querySelector(".card-holder-input");
+    var cardHolderName = document.querySelector(".card-holder-name");
+
+    var monthInput = document.querySelector(".month-input");
+    var month = document.querySelector(".exp-month");
+
+    var yearInput = document.querySelector(".year-input");
+    var year = document.querySelector(".exp-year");
+
+    var cvvInput = document.querySelector(".cvv-input");
+    var cardFront = document.querySelector(".front");
+    var cardBack = document.querySelector(".back");
+    var cvv = document.querySelector(".cvv-box");
+
+    cardNumberInput.oninput = function() {
+        cardNumberBox.innerText = cardNumberInput.value;
+    };
+
+    cardHolderInput.oninput = function() {
+        cardHolderName.innerText = cardHolderInput.value;
+    }
+
+    monthInput.oninput = function() {
+        month.innerText = monthInput.value;
+    }
+
+    yearInput.oninput = function() {
+        year.innerText = yearInput.value;
+    }
+    
+    cvvInput.onmouseenter = function() {
+        cardFront.style.transform = 'perspective(1000px) rotateY(-180deg)';
+        cardBack.style.transform = 'perspective(1000px) rotateY(0deg)';
+    }
+
+    cvvInput.onmouseleave = function() {
+        cardFront.style.transform = 'perspective(1000px) rotateY(0deg)';
+        cardBack.style.transform = 'perspective(1000px) rotateY(180deg)';
+    }
+
+    cvvInput.oninput = function() {
+        cvv.innerText = cvvInput.value;
+    }
+});
+
+
+
